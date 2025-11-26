@@ -53,6 +53,10 @@ a {
   border-radius: 12px;
   box-shadow: var(--shadow-1);
 }
+#hamburger {
+  color: var(--panel);
+  background: linear-gradient(90deg, var(--accent-1), #6ee8d4);
+}
 
 /* Sidebar */
 .sidebar {
@@ -483,7 +487,6 @@ select {
   .app {
     flex-direction: column;
     padding: 12px;
-    height: auto;
   }
 
   /* Sidebar */
@@ -503,6 +506,11 @@ select {
   .topbar {
     display: flex;
     margin-bottom: 12px;
+    font-size: 1.9rem;
+  }
+  #hamburger {
+    font-size: 1.5rem;
+    width: 10%;
   }
 
   /* Content */
@@ -541,6 +549,9 @@ select {
   }
 
   /* Modal */
+  .modal {
+    height: 80vh;
+  }
   .modal-content {
     width: 90%;
     padding: 40px 20px;
@@ -552,13 +563,13 @@ select {
   }
 
   .form label {
-    font-size: 1.1rem;
+    font-size: 1.9rem;
   }
 
   .form input {
     width: 100%;
-    padding: 12px;
-    font-size: 1rem;
+    padding: 14px;
+    font-size: 1.2rem;
   }
 
   .modal-actions {
@@ -576,8 +587,15 @@ select {
 
 /* Mobiles petits écrans */
 @media (max-width: 600px) {
-  .project-title {
-    font-size: 2rem;
+  .topbar {
+    display: flex;
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+  }
+  #hamburger {
+    font-size: 1.5rem;
+    width: 20%;
+    height: 100%;
   }
 
   .nav-btn {
@@ -599,6 +617,12 @@ select {
   }
 
   .form label {
-    font-size: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .form input {
+    width: 100%;
+    padding: 11px;
+    font-size: 1.2rem;
   }
 }
