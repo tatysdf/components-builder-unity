@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Unity UI Components Builder</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Topbar (mobile) -->
+      <header class="topbar" role="banner">
+        <button
+          id="hamburger"
+          class="hamburger"
+          aria-label="Ouvrir le menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+        <div class="topbar-title">Unity UI Components Builder</div>
+      </header>
+
+      <!-- Sidebar -->
+      <nav class="sidebar" id="sidebar" aria-label="Navigation principale">
+        <div class="brand">
+          <div class="logo">UI</div>
+          <div class="brand-title">Unity UI Builder</div>
+        </div>
+
+        <ul class="nav-list" role="menu">
+          <li role="none">
+            <button role="menuitem" class="nav-btn" data-page="dashboard">
+              Dashboard
+            </button>
+          </li>
+          <li role="none">
+            <button role="menuitem" class="nav-btn" data-page="projects">
+              Projets
+            </button>
+          </li>
+          <li role="none">
+            <button role="menuitem" class="nav-btn" data-page="builder">
+              Builder
+            </button>
+          </li>
+          <li role="none">
+            <button role="menuitem" class="nav-btn" data-page="settings">
+              Paramètres
+            </button>
+          </li>
+          <li role="none">
+            <button role="menuitem" class="nav-btn" data-page="help">
+              Aide
+            </button>
+          </li>
+        </ul>
+
+        <div class="sidebar-footer">
+          <small>v0.1 — Prototype</small>
+        </div>
+      </nav>
+
+      <!-- Main content -->
+      <main id="content" class="content" role="main" tabindex="0">
+        <!-- Les pages seront injectées ici -->
+      </main>
+    </div>
+
+    <script src="./js/helper.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
