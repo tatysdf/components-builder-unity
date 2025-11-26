@@ -36,6 +36,7 @@ async function loadPage(page) {
     if (!res.ok) throw new Error("Erreur chargement page: " + res.status);
     const html = await res.text();
     contentEl.innerHTML = html;
+    setActiveButton(page);
     // signaler que la page a été insérée
     window.dispatchEvent(
       new CustomEvent(`${page}-loaded`, { detail: { page } })
@@ -91,14 +92,17 @@ if (hamburger) {
 */
 function initDashboardUi() {
   window.dispatchEvent(new CustomEvent("dashboard-ready", { detail: {} }));
+  document
+    .getElementById("create-project-btn")
+    .addEventListener("click", () => {
+      window.UIApp.loadPage("projects");
+    });
 }
 function initProjectsUi() {
-
   window.dispatchEvent(
     new CustomEvent("render-projects-request", { detail: {} })
   );
 
-  // Récupération directe des éléments (ils existent désormais car SPA les a injectés)
   const createBtn = document.getElementById("createProjectConfirm");
   const cancelBtn = document.getElementById("createProjectCancel");
   const projectNameInput = document.getElementById("projectName");
@@ -131,7 +135,7 @@ function initProjectsUi() {
     const project = createProjectStructure(name, techName);
     addProjects(project);
     setCurrentProject(techName);
-    
+
     modal.style.display = "none";
     projectNameInput.value = "";
     loadAndDisplayProject();
@@ -163,7 +167,7 @@ function initProjectsUi() {
     if (e.target.classList.contains("open-project")) {
       const id = e.target.dataset.id;
       setCurrentProject(id);
-      window.location.href = "./";
+      window.UIApp.loadPage("builder"); // charge le builder via SPA
     }
 
     if (e.target.classList.contains("delete-project")) {
