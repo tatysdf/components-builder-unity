@@ -1,9 +1,5 @@
-/* main.js
- - Navigation SPA : charge les fichiers de /pages/*.html
- - Gère la classe active sur le menu
- - Gère le menu hamburger mobile (a11y)
- - Emet des CustomEvent que la personne 2/3 écoutent
-*/
+import { initBuilder } from "./builder.js";
+
 const pageMap = {
   dashboard: "pages/dashboard.html",
   projects: "pages/projects.html",
@@ -24,7 +20,7 @@ function setActiveButton(page) {
     );
   });
 }
-// Injecte une page dans #content et déclenche des hooks/events
+
 async function loadPage(page) {
   const file = pageMap[page];
   if (!file) {
@@ -37,16 +33,16 @@ async function loadPage(page) {
     const html = await res.text();
     contentEl.innerHTML = html;
     setActiveButton(page);
-    // signaler que la page a été insérée
+
     window.dispatchEvent(
       new CustomEvent(`${page}-loaded`, { detail: { page } })
     );
-    // init UI small handlers (delegations, emitting events)
+
     if (page === "dashboard") initDashboardUi();
     if (page === "projects") initProjectsUi();
     if (page === "builder") initBuilderUi();
     if (page === "settings") initSettingsUi();
-    // légère animation d'entrée
+
     contentEl.style.opacity = 0;
     contentEl.style.transform = "translateY(6px)";
     requestAnimationFrame(() => {
@@ -59,13 +55,13 @@ async function loadPage(page) {
     console.error(err);
     contentEl.innerHTML = `<div class="card"><p>Impossible de charger la page.</p></div>`;
   }
-  // fermer la sidebar en mobile
+
   if (window.innerWidth <= 980) {
     sidebar.classList.remove("open");
     hamburger && hamburger.setAttribute("aria-expanded", "false");
   }
 }
-// listeners menu
+
 navButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     const page = btn.dataset.page;
@@ -73,7 +69,7 @@ navButtons.forEach((btn) => {
     loadPage(page);
   });
 });
-// hamburger accessible
+
 if (hamburger) {
   hamburger.addEventListener("click", () => {
     const isOpen = sidebar.classList.toggle("open");
@@ -81,15 +77,12 @@ if (hamburger) {
     if (!isOpen) contentEl?.focus();
   });
 }
-// initial load
+
 (function init() {
   setActiveButton("dashboard");
   loadPage("dashboard");
 })();
-/* --- UI init functions ---
-   Ces fonctions font peu de choses : elles connectent l'UI aux CustomEvents
-   que les modules métiers écouteront pour faire le vrai travail.
-*/
+
 function initDashboardUi() {
   window.dispatchEvent(new CustomEvent("dashboard-ready", { detail: {} }));
   document
@@ -167,22 +160,31 @@ function initProjectsUi() {
     if (e.target.classList.contains("open-project")) {
       const id = e.target.dataset.id;
       setCurrentProject(id);
-      window.UIApp.loadPage("builder"); // charge le builder via SPA
+      window.UIApp.loadPage("builder");
     }
 
     if (e.target.classList.contains("delete-project")) {
       const id = e.target.dataset.id;
-      deleteProjects(id);
-      loadAndDisplayProject();
+      if (confirm("Vous voulez vraiment suprimer ?")) {
+        deleteProjects(id);
+        loadAndDisplayProject();
+      }
     }
   });
 }
-function initBuilderUi() {
-  // Indique à l'équipe 3 que le DOM du builder est prêt
-  window.dispatchEvent(new CustomEvent("builder-ui-ready", { detail: {} }));
 
+async function initBuilderUi() {
+  window.dispatchEvent(new CustomEvent("builder-ui-ready", { detail: {} }));
   window.dispatchEvent(new CustomEvent("export-cs-request", { detail: {} }));
+
+  try {
+    const { initBuilder } = await import("./builder.js");
+    initBuilder();
+  } catch (err) {
+    console.error("[main] Impossible d'importer builder.js :", err);
+  }
 }
+
 
 function initSettingsUi() {
   window.dispatchEvent(new CustomEvent("settings-ready", { detail: {} }));

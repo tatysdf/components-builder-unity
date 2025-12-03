@@ -212,7 +212,7 @@ a {
   padding: 14px;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.01),
+    rgba(255, 255, 255, 0.078),
     rgba(255, 255, 255, 0)
   );
   border: 1px solid var(--glass);
@@ -233,16 +233,13 @@ a {
 .palette .component-item:hover {
   transform: translateY(-6px);
   box-shadow: 0 10px 30px rgba(11, 10, 20, 0.45);
-  background: linear-gradient(
-    90deg,
-    rgba(123, 97, 255, 0.06),
-    rgba(47, 230, 208, 0.03)
-  );
+  background:whitesmoke;
+  color: #041017;
 }
 
 /* Canvas area */
 .canvas {
-  min-height: 300px;
+  min-height: 85vh;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -252,6 +249,23 @@ a {
   padding: 1rem;
   border-radius: 8px;
   background: transparent;
+}
+
+.dropped-component {
+  padding: 10px;
+  margin: 5px;
+  background: var(--accent-1);
+  color: white;
+  border: 1px solid #8367c7;
+  cursor: pointer;
+}
+.dropped-component:hover{
+  transform: scale(1.05);
+}
+
+.canvas.dragover {
+  outline: 2px dashed #8367c7;
+  outline-offset: 6px;
 }
 
 /* Inspector */

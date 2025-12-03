@@ -1,41 +1,46 @@
-
 <body>
-    <section class="page">
-  <div class="page-header">
-    <h1>Builder</h1>
-    <div>
-      <button id="export-cs-btn" class="button-primary">Exporter en C#</button>
+  <section class="page">
+    <div class="page-header">
+      <h1>Builder</h1>
+      <div>
+        <button id="export-cs-btn" class="button-primary">
+          Exporter en C#
+        </button>
+      </div>
     </div>
-  </div>
 
-  <div class="builder-layout">
-    <!-- Palette (gauche) -->
-     <aside class="palette card">
-      <h3>Palette</h3>
-      <div class="component-item" data-type="text">Text</div>
-      <div class="component-item" data-type="button">Button</div>
-      <div class="component-item" data-type="input">Input</div>
-      <div class="component-item" data-type="helpbox">HelpBox</div>
+    <div class="builder-layout">
+      <!-- Palette (gauche) -->
+      <aside class="palette card">
+        <h3>Palette</h3>
+        <div class="component-item" draggable="true" data-type="text">Text</div>
+        <div class="component-item" draggable="true" data-type="button">
+          Button
+        </div>
+       
 
-      <hr/>
-      <p style="color:var(--muted);font-size:0.9rem">Glisser & déposer — implémentation JS en Semaine 2.</p>
-    </aside>
+        <hr />
+      </aside>
 
-    <!-- Canvas (centre) -->
-    <section class="canvas card" id="canvas-area" aria-label="Zone de construction">
-      <h3>Zone de construction</h3>
-       <div id="canvas-contents">
-        <p style="color:var(--muted)">Aucun composant pour le moment.</p>
-      </div>
-    </section>
+      <!-- Canvas (centre) -->
+      <section
+        class="canvas card"
+        id="canvas-area"
+        aria-label="Zone de construction"
+      >
+        <h3>Zone de construction</h3>
+        <div id="canvas-contents" draggable="true"></div>
+      </section>
 
-    <!-- Inspector (droite) -->
-   <aside class="inspector card" id="inspector-area">
-      <h3>Propriétés</h3>
-      <div id="inspector-contents">
-        <p style="color:var(--muted)">Sélectionnez un composant pour modifier ses propriétés.</p>
-      </div>
-    </aside>
-  </div>
-</section>
-    
+      <!-- Inspector (droite) -->
+      <aside class="inspector card" id="inspector-area">
+        <h3>Propriétés</h3>
+        <div id="inspector-contents">
+          <p style="color: var(--muted)">
+            Sélectionnez un composant pour modifier ses propriétés.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</body>
